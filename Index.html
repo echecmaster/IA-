@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studio Lazuli | Création Digitale</title>
+    <title>Studio Lazuli | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* ================= PALETTE DE COULEURS ================= */
+        /* ================= PALETTE & VARIABLES ================= */
         :root {
-            --bleu-marine: #1A2A3A; /* Bleu royal marine mat */
-            --vert-canard: #1C5D53; /* Vert canard royal mat */
-            --vert-clair: #288072; /* Pour les survols */
-            --texte-clair: #F4F6F6; /* Blanc cassé mat */
+            --bleu-marine: #1A2A3A; /* Mat et profond */
+            --vert-canard: #1C5D53; /* Mat et élégant */
+            --vert-clair: #288072;
+            --texte-clair: #F4F6F6;
             --texte-secondaire: #A9B9C6;
+            --or: #D4AF37; /* Pour les décorations */
         }
 
-        /* ================= RESET & BASE ================= */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -27,310 +28,338 @@
             background-color: var(--bleu-marine);
             color: var(--texte-clair);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
-            font-weight: 700;
         }
 
-        /* ================= DEVANTURE (HERO) ================= */
-        .hero {
-            min-height: 80vh;
+        /* ================= MENU DE NAVIGATION ================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(26, 42, 58, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--vert-canard);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap; /* S'adapte sur mobile */
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--texte-clair);
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--vert-clair);
+        }
+
+        /* ================= STRUCTURE DES SECTIONS ================= */
+        section {
+            min-height: 100vh;
+            padding: 100px 20px 50px; /* Espace pour le menu fixe */
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, var(--bleu-marine) 30%, var(--vert-canard) 100%);
-            position: relative;
-            animation: fadeInDown 1.5s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            color: var(--texte-clair);
-            text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .hero h1 span {
-            color: var(--vert-clair);
-            font-style: italic;
-        }
-
-        .hero p.intro {
-            max-width: 700px;
-            font-size: 1.1rem;
-            color: var(--texte-secondaire);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            animation: bounce 2s infinite;
-            color: var(--vert-clair);
-            font-size: 1.5rem;
-        }
-
-        /* ================= PORTFOLIO SECTION ================= */
-        .portfolio-section {
-            padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
-            text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .filter-status {
-            text-align: center;
             margin-bottom: 3rem;
-            min-height: 30px;
-        }
-
-        .reset-btn {
-            background-color: transparent;
-            border: 1px solid var(--vert-clair);
             color: var(--vert-clair);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: 'Poppins';
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: none; /* Caché par défaut */
         }
 
-        .reset-btn:hover {
-            background-color: var(--vert-clair);
-            color: var(--bleu-marine);
+        /* ================= ACCUEIL ================= */
+        #accueil h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
         }
 
-        /* ================= GRID DES CRÉATIONS ================= */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+        #accueil p {
+            max-width: 600px;
+            font-size: 1.1rem;
+            color: var(--texte-secondaire);
+            margin-bottom: 1.5rem;
         }
 
-        .card {
-            background-color: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
+        /* Décoration du bouton */
+        .btn-decor-container {
+            margin-top: 2rem;
+            padding: 15px;
+            border: 1px solid var(--or);
+            border-radius: 50px;
+            display: inline-block;
             position: relative;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            border-color: var(--vert-canard);
+        .btn-decor-container::before, .btn-decor-container::after {
+            content: '✧';
+            color: var(--or);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
         }
+        .btn-decor-container::before { left: -30px; }
+        .btn-decor-container::after { right: -30px; }
 
-        .card-img {
-            width: 100%;
-            height: 250px;
-            background-color: var(--vert-canard); /* Placeholder de couleur */
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            transition: transform 0.5s ease;
-        }
-
-        .card:hover .card-img {
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-            background: linear-gradient(to top, var(--bleu-marine) 80%, transparent);
-            position: relative;
-            z-index: 2;
-        }
-
-        .category-tag {
-            font-size: 0.75rem;
+        .btn-main {
+            background-color: var(--vert-canard);
+            color: var(--texte-clair);
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--vert-clair);
-            margin-bottom: 0.5rem;
-            display: block;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
 
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .btn-main:hover {
+            background-color: var(--vert-clair);
+            box-shadow: 0 0 15px rgba(40, 128, 114, 0.5);
         }
 
-        .card p {
+        /* ================= MES CRÉATIONS ================= */
+        .creations-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .creation-btn {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--vert-canard);
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            width: calc(33.333% - 20px);
+            min-width: 250px;
+            transition: transform 0.3s;
+        }
+
+        .creation-btn:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .creation-btn img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .creation-btn p {
             font-size: 0.9rem;
-            color: var(--texte-secondaire);
-            display: -webkit-box;
-            -webkit-line-clamp: 2; /* Limite à 2 lignes exactement */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            color: var(--texte-clair);
+            font-style: italic;
         }
 
-        .click-hint {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(28, 93, 83, 0.8);
-            color: white;
-            font-size: 0.7rem;
-            padding: 4px 8px;
-            border-radius: 20px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .card:hover .click-hint {
-            opacity: 1;
-        }
-
-        /* ================= ANIMATIONS ================= */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
-        }
-
-        /* Classes pour le filtre JS */
-        .hidden {
+        /* ================= GALERIE (MODALE) ================= */
+        .modal {
             display: none;
-            opacity: 0;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
         }
 
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border: 2px solid var(--vert-canard);
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ================= INFORMATIONS & CONTACT ================= */
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .social-btn {
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            border: 1px solid var(--texte-clair);
+            transition: background 0.3s;
+        }
+
+        .social-btn.insta {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border: none;
+        }
+
+        .social-btn.linkedin-none {
+            background-color: #555;
+            cursor: not-allowed;
+            color: #aaa;
+            border: none;
+        }
+
+        /* ================= RESPONSIVE (SMARTPHONE) ================= */
+        @media (max-width: 768px) {
+            nav ul { gap: 10px; }
+            nav a { font-size: 0.8rem; }
+            #accueil h1 { font-size: 2.8rem; }
+            .creation-btn { width: 100%; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <h1>Studio <span>Lazuli</span></h1>
-        <p class="intro">
-            Bonjour, je suis Lola ! Créatrice digitale autodidacte, je partage ici mon univers.<br>
-            Passionnée par le graphisme, je conçois des identités visuelles uniques et des illustrations sur-mesure pour donner vie à vos idées.
-        </p>
-        <div class="scroll-indicator">↓</div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#informations">Informations</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#creations">Mes Créations</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section class="portfolio-section">
-        <h2 class="section-title">Mes Créations</h2>
+    <section id="accueil">
+        <h1>Studio Lazuli</h1>
+        <p>Bonjour ! Je suis créatrice digitale basée à <strong>Paris</strong>.</p>
+        <p>Depuis <strong>6 mois</strong>, je donne vie à vos idées et je conçois des univers visuels uniques, principalement à l'aide de <strong>Photoshop</strong>.</p>
         
-        <div class="filter-status">
-            <button id="resetBtn" class="reset-btn" onclick="resetFilters()">Voir toutes les créations</button>
+        <div class="btn-decor-container">
+            <a href="#creations" class="btn-main">Voir mes créations</a>
         </div>
+    </section>
 
-        <div class="grid" id="portfolioGrid">
+    <section id="creations">
+        <h2 class="section-title">Mes Créations</h2>
+        <div class="creations-grid">
             
-            <div class="card" data-category="identite" onclick="filterCategory('identite')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=800');">
-                    <span class="click-hint">Voir projets similaires</span>
-                </div>
-                <div class="card-content">
-                    <span class="category-tag">Identité Visuelle</span>
-                    <h3>Side Eye</h3>
-                    <p>Branding vibrant pour une marque de lunettes audacieuse.<br>Une esthétique rétro-moderne qui capte immédiatement le regard.</p>
-                </div>
+            <div class="creation-btn" onclick="openGallery('image1.png')">
+                <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=400" alt="Side Eye">
+                <p>Branding vibrant et rétro pour lunettes.</p>
             </div>
 
-            <div class="card" data-category="illustration" onclick="filterCategory('illustration')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1581007871115-f14bc016e0a4?auto=format&fit=crop&q=80&w=800');">
-                    <span class="click-hint">Voir projets similaires</span>
-                </div>
-                <div class="card-content">
-                    <span class="category-tag">Illustration</span>
-                    <h3>La Louche</h3>
-                    <p>Création graphique et minimaliste pour des bouillons faits maison.<br>Des traits chaleureux pour une touche gourmande et conviviale.</p>
-                </div>
+            <div class="creation-btn" onclick="openGallery('image2.png')">
+                <img src="https://images.unsplash.com/photo-1581007871115-f14bc016e0a4?auto=format&fit=crop&q=80&w=400" alt="La Louche">
+                <p>Illustration chaleureuse pour bouillons maison.</p>
             </div>
 
-            <div class="card" data-category="identite" onclick="filterCategory('identite')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1594631252845-29fc4cc8cbf9?auto=format&fit=crop&q=80&w=800');">
-                    <span class="click-hint">Voir projets similaires</span>
-                </div>
-                <div class="card-content">
-                    <span class="category-tag">Identité Visuelle</span>
-                    <h3>Steep Society</h3>
-                    <p>Design de marque premium pour une maison de thé contemporaine.<br>Une atmosphère épurée invitant à la détente et à la sérénité.</p>
-                </div>
+            <div class="creation-btn" onclick="openGallery('image3.png')">
+                <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cbf9?auto=format&fit=crop&q=80&w=400" alt="Steep Society">
+                <p>Identité épurée pour maison de thé.</p>
             </div>
 
-            <div class="card" data-category="graphisme" onclick="filterCategory('graphisme')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1615397323628-ea24c8b9a117?auto=format&fit=crop&q=80&w=800');">
-                    <span class="click-hint">Voir projets similaires</span>
-                </div>
-                <div class="card-content">
-                    <span class="category-tag">Graphisme</span>
-                    <h3>Guud</h3>
-                    <p>Conception de packaging pour un kit de beauté fait maison.<br>Un univers pastel et doux conçu pour sublimer le bien-être naturel.</p>
-                </div>
+            <div class="creation-btn" onclick="openGallery('image4.png')">
+                <img src="https://images.unsplash.com/photo-1615397323628-ea24c8b9a117?auto=format&fit=crop&q=80&w=400" alt="Guud">
+                <p>Packaging pastel pour kit de beauté.</p>
             </div>
 
-            <div class="card" data-category="identite" onclick="filterCategory('identite')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&q=80&w=800');">
-                    <span class="click-hint">Voir projets similaires</span>
-                </div>
-                <div class="card-content">
-                    <span class="category-tag">Identité Visuelle</span>
-                    <h3>Choco Loco</h3>
-                    <p>Branding de caractère pour des chocolats purement artisanaux.<br>Des teintes profondes mariées à une typographie haut de gamme.</p>
-                </div>
+            <div class="creation-btn" onclick="openGallery('image5.png')">
+                <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&q=80&w=400" alt="Choco Loco">
+                <p>Design de caractère pour chocolats artisanaux.</p>
             </div>
 
         </div>
     </section>
 
+    <section id="informations">
+        <h2 class="section-title">Informations</h2>
+        <p style="margin-bottom: 2rem; color: var(--texte-secondaire);">Retrouvez-moi sur mes réseaux pour suivre mon aventure créative.</p>
+        
+        <div class="social-links">
+            <a href="https://www.instagram.com/studio__lazuli?igsh=MXZ2cnM5YW9mYWU3eA==" target="_blank" class="social-btn insta">Mon Instagram</a>
+            <a href="#" class="social-btn linkedin-none" onclick="event.preventDefault();">LinkedIn (Bientôt disponible)</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <p style="max-width: 500px; color: var(--texte-secondaire);">
+            Une idée en tête ? Un projet à réaliser ?<br><br>
+            La manière la plus simple de me contacter actuellement est de m'envoyer un Message Privé directement sur mon compte Instagram. Je vous répondrai avec plaisir !
+        </p>
+        <br>
+        <a href="https://www.instagram.com/studio__lazuli?igsh=MXZ2cnM5YW9mYWU3eA==" target="_blank" class="btn-main">M'envoyer un message</a>
+    </section>
+
+    <div id="imageModal" class="modal">
+        <span class="close-btn" onclick="closeGallery()">&times;</span>
+        <img class="modal-content" id="fullImage" src="">
+    </div>
+
     <script>
-        function filterCategory(category) {
-            const cards = document.querySelectorAll('.card');
-            const resetBtn = document.getElementById('resetBtn');
-
-            // Parcourt chaque carte
-            cards.forEach(card => {
-                // Si la catégorie de la carte correspond à celle cliquée, on l'affiche, sinon on la cache
-                if(card.getAttribute('data-category') === category) {
-                    card.style.display = "block";
-                    setTimeout(() => card.style.opacity = "1", 50);
-                } else {
-                    card.style.opacity = "0";
-                    setTimeout(() => card.style.display = "none", 400); // Attend la fin de la transition CSS
-                }
-            });
-
-            // Affiche le bouton pour réinitialiser la vue
-            resetBtn.style.display = "inline-block";
-            resetBtn.innerText = "Filtre actif : Afficher tout";
+        // Fonction pour ouvrir la galerie avec l'image demandée
+        function openGallery(imageSrc) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("fullImage");
+            
+            modal.style.display = "flex";
+            // On charge l'image locale demandée (ex: image1.png)
+            modalImg.src = imageSrc;
         }
 
-        function resetFilters() {
-            const cards = document.querySelectorAll('.card');
-            const resetBtn = document.getElementById('resetBtn');
+        // Fonction pour fermer la galerie
+        function closeGallery() {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
 
-            cards.forEach(card => {
-                card.style.display = "block";
-                setTimeout(() => card.style.opacity = "1", 50);
-            });
-
-            // Cache le bouton de réinitialisation
-            resetBtn.style.display = "none";
+        // Fermer la galerie si on clique à côté de l'image
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     </script>
+
 </body>
 </html>
